@@ -10,7 +10,7 @@ namespace RestauranteWeb.Models
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [StringLength(40, MinimumLength = 5, ErrorMessage = "O campo {0} deve ter no máximo {1} caracteres.")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "O campo {0} deve ter no máximo {1} caracteres.")]
         public string Nome { get; set; } = null!;
     }
 }
