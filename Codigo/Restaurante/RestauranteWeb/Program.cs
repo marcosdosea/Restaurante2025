@@ -1,3 +1,8 @@
+using Core;
+using Core.Service;
+using Microsoft.EntityFrameworkCore;
+using Service;
+
 namespace RestauranteWeb
 {
     public class Program
@@ -8,6 +13,13 @@ namespace RestauranteWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<RestauranteContext>(
+                options => options.UseMySQL(builder.Configuration.GetConnectionString("RestauranteConnection")));
+
+            builder.Services.AddTransient<IGrupoCardapioService, GrupoCardapioService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
