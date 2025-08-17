@@ -2,10 +2,10 @@
 {
     public interface IGrupoCardapioService
     {
-        int Create(Grupocardapio grupoCardapio);
+        uint Create(Grupocardapio grupoCardapio);
         void Edit(Grupocardapio grupoCardapio);
-        void Delete(int id);
-        Grupocardapio Get(int id);
+        void Delete(uint id);
+        Grupocardapio Get(uint id);
         IEnumerable<Grupocardapio> GetAll();
     }
 }
