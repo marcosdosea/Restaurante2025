@@ -28,6 +28,8 @@ namespace RestauranteWeb
 
             builder.Services.AddScoped<IFormaPagamentoService, FormaPagamentoService>();
 
+            builder.Services.AddScoped<ITipoFuncionario, TipoFuncionarioService>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
