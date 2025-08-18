@@ -14,10 +14,19 @@ namespace RestauranteWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Ensure the connection string is not null or empty to avoid CS8604
+            var connectionString = builder.Configuration.GetConnectionString("RestauranteConnection");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("A conexão com o banco de dados não foi configurada corretamente.");
+            }
+
             builder.Services.AddDbContext<RestauranteContext>(
-                options => options.UseMySQL(builder.Configuration.GetConnectionString("RestauranteConnection")));
+                options => options.UseMySQL(connectionString));
 
             builder.Services.AddTransient<IGrupoCardapioService, GrupoCardapioService>();
+
+            builder.Services.AddScoped<IFormaPagamentoService, FormaPagamentoService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

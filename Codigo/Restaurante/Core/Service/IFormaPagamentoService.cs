@@ -7,5 +7,6 @@
         void Delete(int id);
         Formapagamento Get(int id);
         IEnumerable<Formapagamento> GetAll();
+        object Get(uint id);
     }
 }
