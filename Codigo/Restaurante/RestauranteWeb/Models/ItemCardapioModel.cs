@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestauranteWeb.Models
 {
@@ -38,5 +39,11 @@ namespace RestauranteWeb.Models
         [Display(Name = "Grupo de Cardápio")]
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public uint IdGrupoCardapio { get; set; }
+
+        public virtual Grupocardapio IdGrupoCardapioNavigation { get; set; } = null!;
+
+        public virtual Restaurante IdRestauranteNavigation { get; set; } = null!;
+
+        public virtual ICollection<Pedidoitemcardapio> Pedidoitemcardapios { get; set; } = new List<Pedidoitemcardapio>();
     }
 }

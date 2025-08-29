@@ -14,6 +14,8 @@ namespace Service
 
         public uint Create(Itemcardapio itemCardapio)
         {
+            itemCardapio.IdGrupoCardapio = 1;
+            itemCardapio.IdRestaurante = 1;
             _context.Add(itemCardapio);
             _context.SaveChanges();
 
