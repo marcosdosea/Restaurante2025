@@ -14,4 +14,6 @@ public partial class Mesa
     public virtual ICollection<Atendimento> Atendimentos { get; set; } = new List<Atendimento>();
 
     public virtual Restaurante IdRestauranteNavigation { get; set; } = null!;
+    public int Numero { get; set; }
+    public int Capacidade { get; set; }
 }

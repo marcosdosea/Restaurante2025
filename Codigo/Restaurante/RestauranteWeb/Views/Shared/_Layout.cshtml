@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="FormaPagamento" asp-action="Index">Formas de Pagamento</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Cardápio
@@ -41,8 +44,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="TipoRestaurante" asp-action="Index">Tipos de Restaurante</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoFuncionario" asp-action="Index">Tipos de Funcionario</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownFuncionario" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Funcionários
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownFuncionario">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="TipoFuncionario" asp-action="Index">Tipos de Funcionário</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

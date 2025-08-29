@@ -1,10 +1,6 @@
 ﻿using Core;
 using Core.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Service
 {
@@ -17,14 +13,35 @@ namespace Service
             _context = context;
         }
 
-        public int Create(Formapagamento formaPagamento)
+        public uint Create(Formapagamento formaPagamento)
         {
             _context.Add(formaPagamento);
             _context.SaveChanges();
-            return (int)formaPagamento.Id;
+            
+            return formaPagamento.Id;
         }
 
-        public void Delete(int id)
+        public Formapagamento Get(uint id)
+        {
+            return _context.Formapagamentos.FirstOrDefault(f => f.Id == id)
+                   ?? throw new KeyNotFoundException($"Forma de pagamento não encontrada.");
+        }
+        public IEnumerable<Formapagamento> GetAll()
+        {
+            return _context.Formapagamentos.ToList();
+        }
+
+        public void Edit(Formapagamento formaPagamento)
+        {
+            var existingForma = _context.Formapagamentos.Find(formaPagamento.Id);
+            if (existingForma != null)
+            {
+                existingForma.Nome = formaPagamento.Nome;
+                _context.SaveChanges();
+            }
+        }
+
+        public void Delete(uint id)
         {
             var formaPagamento = _context.Formapagamentos.Find(id);
             if (formaPagamento != null)
@@ -32,28 +49,6 @@ namespace Service
                 _context.Formapagamentos.Remove(formaPagamento);
                 _context.SaveChanges();
             }
-        }
-
-        public void Edit(Formapagamento formaPagamento)
-        {
-            _context.Formapagamentos.Update(formaPagamento);
-            _context.SaveChanges();
-        }
-
-        public Formapagamento Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Get(uint id)
-        {
-            return _context.Formapagamentos.FirstOrDefault(f => f.Id == id) 
-                ?? throw new KeyNotFoundException($"Forma de pagamento com ID {id} não encontrada.");
-        }
-
-        public IEnumerable<Formapagamento> GetAll()
-        {
-            return _context.Formapagamentos.ToList();
         }
     }
 }

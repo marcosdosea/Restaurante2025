@@ -2,7 +2,7 @@
 {
     public interface IMesaService
     {
-        int Create(Mesa mesa);
+        uint Create(Mesa mesa);
         void Edit(Mesa mesa);
         void Delete(int id);
         Mesa Get(int id);
