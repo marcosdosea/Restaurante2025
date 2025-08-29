@@ -12,12 +12,14 @@ namespace RestauranteWeb.Controllers
     {
         private readonly IItemCardapioService _itemCardapioService;
         private readonly IGrupoCardapioService _grupoCardapioService;
+        private readonly IRestauranteService restauranteService;
         private readonly IMapper _mapper;
 
-        public ItemCardapioController(IItemCardapioService itemCardapioService, IGrupoCardapioService _grupoCardapioService, IMapper mapper)
+        public ItemCardapioController(IItemCardapioService itemCardapioService, IGrupoCardapioService grupoCardapioService, IRestauranteService restauranteService, IMapper mapper)
         {
             _itemCardapioService = itemCardapioService;
-            this._grupoCardapioService = _grupoCardapioService;
+            _grupoCardapioService = grupoCardapioService;
+            this.restauranteService = restauranteService;
             _mapper = mapper;
         }
 
@@ -45,6 +47,9 @@ namespace RestauranteWeb.Controllers
             var grupos = _grupoCardapioService.GetAll();
             ViewBag.GruposCardapio = new SelectList(grupos, "Id", "Nome");
 
+            var restaurantes = restauranteService.GetAll();
+            ViewBag.Restaurantes = new SelectList(restaurantes, "Id", "Nome");
+
             return View();
         }
 
@@ -71,12 +76,8 @@ namespace RestauranteWeb.Controllers
             var grupos = _grupoCardapioService.GetAll();
             ViewBag.GruposCardapio = new SelectList(grupos, "Id", "Nome");
 
-            // Mock para o Restaurante
-            ViewBag.IdRestaurante = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "1", Text = "Restaurante Teste 1" },
-                new SelectListItem { Value = "2", Text = "Restaurante Teste 2" }
-            };
+            var restaurantes = restauranteService.GetAll();
+            ViewBag.Restaurantes = new SelectList(restaurantes, "Id", "Nome");
 
             return View(itemCardapioModel);
         }

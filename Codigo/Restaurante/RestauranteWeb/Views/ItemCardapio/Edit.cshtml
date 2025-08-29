@@ -1,6 +1,6 @@
 ﻿@model RestauranteWeb.Models.ItemCardapioModel
 
-<h4>Item Cardápio</h4>
+<h4>Item de Cardápio</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdRestaurante" class="control-label"></label>
-                <select asp-for="IdRestaurante" class="form-control" asp-items="ViewBag.IdRestaurante"></select>
+                <select asp-for="IdRestaurante" class="form-control" asp-items="ViewBag.Restaurantes"></select>
                 <span asp-validation-for="IdRestaurante" class="text-danger"></span>
             </div>
             <div class="form-group">
