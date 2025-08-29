@@ -1,6 +1,6 @@
 ﻿@model RestauranteWeb.Models.ItemCardapioModel
 
-<h4>Itemcardapio</h4>
+<h4>Item de Cardápio</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -35,14 +35,14 @@
                 <select asp-for="IdGrupoCardapio" class="form-control" asp-items="ViewBag.GruposCardapio"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary mt-2 mb-2" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {
