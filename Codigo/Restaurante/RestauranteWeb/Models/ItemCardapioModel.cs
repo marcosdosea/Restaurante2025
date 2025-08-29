@@ -39,5 +39,11 @@ namespace RestauranteWeb.Models
         [Display(Name = "Grupo de Cardápio")]
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public uint IdGrupoCardapio { get; set; }
+
+        public virtual Grupocardapio IdGrupoCardapioNavigation { get; set; } = null!;
+
+        public virtual RestauranteModel IdRestauranteNavigation { get; set; } = null!;
+
+        public virtual ICollection<Pedidoitemcardapio> Pedidoitemcardapios { get; set; } = new List<Pedidoitemcardapio>();
     }
 }

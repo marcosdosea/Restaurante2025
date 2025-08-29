@@ -1,0 +1,46 @@
+﻿@model RestauranteWeb.Models.RestauranteModel
+
+@{
+    ViewData["Title"] = "Deletar Restaurante";
+}
+
+<h3>Tem certeza que deseja deletar este restaurante?</h3>
+<div>
+    <h4>Restaurante</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cnpj)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoRestauranteNome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoRestauranteNome)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar à lista</a>
+    </form>
+</div>

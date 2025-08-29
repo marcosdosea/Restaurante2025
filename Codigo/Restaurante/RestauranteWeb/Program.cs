@@ -34,6 +34,8 @@ namespace RestauranteWeb
 
             builder.Services.AddScoped<ITipoRestauranteService, TipoRestauranteService>();
 
+            builder.Services.AddScoped<IRestauranteService, RestauranteService>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
