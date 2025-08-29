@@ -29,8 +29,8 @@ namespace RestauranteWeb.Controllers
         // GET: GrupoCardapioController/Details/5
         public ActionResult Details(uint id)
         {
-            Grupocardapio grupocardapio = _grupoCardapioService.Get(id);
-            GrupoCardapioModel grupoCardapioModel = _mapper.Map<GrupoCardapioModel>(grupocardapio);
+            var grupocardapio = _grupoCardapioService.Get(id);
+            var grupoCardapioModel = _mapper.Map<GrupoCardapioModel>(grupocardapio);
             return View(grupoCardapioModel);
         }
 
@@ -86,7 +86,7 @@ namespace RestauranteWeb.Controllers
         // POST: GrupoCardapioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, IFormCollection collection)
+        public ActionResult Delete(uint id, GrupoCardapioModel grupoCardapioModel)
         {
             _grupoCardapioService.Delete(id);
             return RedirectToAction(nameof(Index));

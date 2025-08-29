@@ -26,6 +26,8 @@ namespace RestauranteWeb
 
             builder.Services.AddTransient<IGrupoCardapioService, GrupoCardapioService>();
 
+            builder.Services.AddScoped<IItemCardapioService, ItemCardapioService>();
+
             builder.Services.AddScoped<IFormaPagamentoService, FormaPagamentoService>();
 
             builder.Services.AddScoped<ITipoFuncionario, TipoFuncionarioService>();
