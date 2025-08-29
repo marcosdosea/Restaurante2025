@@ -87,7 +87,7 @@ namespace RestauranteWeb.Controllers
         // POST: FormaPagamentoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(uint id, IFormCollection collection)
         {
                 _formaPagamentoService.Delete(id);
                 return RedirectToAction(nameof(Index));

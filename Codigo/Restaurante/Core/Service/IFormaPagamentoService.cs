@@ -2,11 +2,10 @@
 {
     public interface IFormaPagamentoService
     {
-        int Create(Formapagamento formaPagamento);
+        uint Create(Formapagamento formaPagamento);
         void Edit(Formapagamento formaPagamento);
-        void Delete(int id);
-        Formapagamento Get(int id);
+        void Delete(uint id);
+        Formapagamento Get(uint id);
         IEnumerable<Formapagamento> GetAll();
-        object Get(uint id);
     }
 }
