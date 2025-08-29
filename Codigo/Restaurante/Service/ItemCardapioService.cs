@@ -12,16 +12,23 @@ namespace Service
             _context = context;
         }
 
+        /// <summary>
+        /// Função para criar um novo item de cardápio.
+        /// </summary>
+        /// <param name="itemCardapio"></param>
+        /// <returns></returns>
         public uint Create(Itemcardapio itemCardapio)
         {
-            itemCardapio.IdGrupoCardapio = 1;
-            itemCardapio.IdRestaurante = 1;
             _context.Add(itemCardapio);
             _context.SaveChanges();
 
             return itemCardapio.Id;
         }
 
+        /// <summary>
+        /// Função para editar um item de cardápio existente.
+        /// </summary>
+        /// <param name="itemCardapio"></param>
         public void Edit(Itemcardapio itemCardapio)
         {
             var existingItem = _context.Itemcardapios.Find(itemCardapio.Id);
@@ -39,6 +46,10 @@ namespace Service
             }
         }
 
+        /// <summary>
+        /// Função para deletar um item de cardápio pelo ID.
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             var itemCardapio = _context.Itemcardapios.Find(id);
@@ -49,12 +60,22 @@ namespace Service
             }
         }
 
+        /// <summary>
+        /// Função para obter um item de cardápio pelo ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
         public Itemcardapio Get(int id)
         {
             return _context.Itemcardapios.FirstOrDefault(i => i.Id == id) 
                    ?? throw new KeyNotFoundException($"Item de cardápio não encontrado.");
         }
 
+        /// <summary>
+        /// Função para obter todos os itens de cardápio.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Itemcardapio> GetAll()
         {
             return _context.Itemcardapios.ToList();
