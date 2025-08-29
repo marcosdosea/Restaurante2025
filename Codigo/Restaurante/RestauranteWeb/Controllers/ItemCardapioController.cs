@@ -40,21 +40,13 @@ namespace RestauranteWeb.Controllers
         }
 
         // GET: ItemCardapioController/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             var grupos = _grupoCardapioService.GetAll();
             ViewBag.GruposCardapio = new SelectList(grupos, "Id", "Nome");
 
-            // Mock para o Restaurante
-            ViewBag.IdRestaurante = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "1", Text = "Restaurante Teste 1" },
-                new SelectListItem { Value = "2", Text = "Restaurante Teste 2" }
-            };
-
             return View();
         }
-
 
         // POST: ItemCardapioController/Create
         [HttpPost]

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RestauranteWeb.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -29,10 +29,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="cardapioDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Cardápio
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="cardapioDropdown">
                                 <li>
                                     <a class="dropdown-item" asp-area="" asp-controller="ItemCardapio" asp-action="Index">Itens do Cardápio</a>
                                 </li>
@@ -41,8 +41,18 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoRestaurante" asp-action="Index">Tipos de Restaurante</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="restauranteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cadastro Restaurante
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="restauranteDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Restaurante" asp-action="Index">Cadastrar Restaurante</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="TipoRestaurante" asp-action="Index">Cadastrar Tipos de Restaurante</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownFuncionario" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,17 +75,19 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
             &copy; 2025 - RestauranteWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
