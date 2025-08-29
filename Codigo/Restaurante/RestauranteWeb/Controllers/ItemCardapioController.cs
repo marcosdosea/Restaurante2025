@@ -3,6 +3,7 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
@@ -10,11 +11,13 @@ namespace RestauranteWeb.Controllers
     public class ItemCardapioController : Controller
     {
         private readonly IItemCardapioService _itemCardapioService;
+        private readonly IGrupoCardapioService _grupoCardapioService;
         private readonly IMapper _mapper;
 
-        public ItemCardapioController(IItemCardapioService itemCardapioService, IMapper mapper)
+        public ItemCardapioController(IItemCardapioService itemCardapioService, IGrupoCardapioService _grupoCardapioService, IMapper mapper)
         {
             _itemCardapioService = itemCardapioService;
+            this._grupoCardapioService = _grupoCardapioService;
             _mapper = mapper;
         }
 
@@ -32,12 +35,16 @@ namespace RestauranteWeb.Controllers
         {
             var itemCardapio = _itemCardapioService.Get(id);
             var itemCardapioModel = _mapper.Map<ItemCardapioModel>(itemCardapio);
+
             return View(itemCardapioModel);
         }
 
         // GET: ItemCardapioController/Create
         public ActionResult Create()
         {
+            var grupos = _grupoCardapioService.GetAll();
+            ViewBag.GruposCardapio = new SelectList(grupos, "Id", "Nome");
+
             return View();
         }
 
@@ -60,6 +67,10 @@ namespace RestauranteWeb.Controllers
         {
             Itemcardapio itemCardapio = _itemCardapioService.Get(id);
             ItemCardapioModel itemCardapioModel = _mapper.Map<ItemCardapioModel>(itemCardapio);
+
+            var grupos = _grupoCardapioService.GetAll();
+            ViewBag.GruposCardapio = new SelectList(grupos, "Id", "Nome");
+
             return View(itemCardapioModel);
         }
 
