@@ -22,6 +22,8 @@ namespace RestauranteWeb.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public int IdRestaurante { get; set; }
 
+        public virtual bool Ativo { get; set; }
+
         public virtual Restaurante IdRestauranteNavigation { get; set; } = null!;
 
         public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
