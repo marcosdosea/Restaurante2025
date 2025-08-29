@@ -5,7 +5,7 @@ namespace Core;
 
 public partial class Funcionario
 {
-    public uint Id { get; set; }
+    public uint Id { get; set; } 
 
     public string Nome { get; set; } = null!;
 

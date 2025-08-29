@@ -1,0 +1,33 @@
+@model IEnumerable<Core.Funcionario>
+@{
+    ViewData["Title"] = "Funcionários";
+}
+<h2>Funcionários</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo Funcionário</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Cpf)</th>
+            <th>Função</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Cpf</td>
+            <td>@item.IdTipoFuncionarioNavigation?.Nome</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
