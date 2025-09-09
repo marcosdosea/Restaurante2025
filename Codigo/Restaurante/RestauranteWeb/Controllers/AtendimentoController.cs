@@ -1,4 +1,5 @@
 using Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RestauranteWeb.Models;
@@ -6,6 +7,7 @@ using System.Linq;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class AtendimentoController : Controller
     {
         private readonly RestauranteContext _context;

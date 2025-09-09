@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class TipoFuncionarioController : Controller
     {
         private readonly ITipoFuncionario _tipoFuncionarioService;

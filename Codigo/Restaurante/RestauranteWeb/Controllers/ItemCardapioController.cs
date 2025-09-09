@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class ItemCardapioController : Controller
     {
         private readonly IItemCardapioService _itemCardapioService;

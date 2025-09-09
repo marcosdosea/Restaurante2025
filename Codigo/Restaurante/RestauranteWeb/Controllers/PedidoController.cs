@@ -1,9 +1,11 @@
 using Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class PedidoController : Controller
     {
         private readonly RestauranteContext _context;

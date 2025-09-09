@@ -1,10 +1,12 @@
 using Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class FuncionarioController : Controller
     {
         private readonly RestauranteContext _context;

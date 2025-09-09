@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
 {
+    [Authorize]
     public class GrupoCardapioController : Controller
     {
         private readonly IGrupoCardapioService _grupoCardapioService;
