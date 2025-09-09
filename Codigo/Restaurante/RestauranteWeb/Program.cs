@@ -22,13 +22,13 @@ namespace RestauranteWeb
             var restauranteConnectionString = builder.Configuration.GetConnectionString("RestauranteConnection");
             if (string.IsNullOrEmpty(restauranteConnectionString))
             {
-                throw new InvalidOperationException("A conexão com o banco de dados n�o foi configurada corretamente.");
+                throw new InvalidOperationException("A conexão com o banco de dados não foi configurada corretamente.");
             }
 
-            var identityConnectionString = builder.Configuration.GetConnectionString("RestauranteConnection");
+            var identityConnectionString = builder.Configuration.GetConnectionString("IdentityContextConnection");
             if (string.IsNullOrEmpty(identityConnectionString))
             {
-                throw new InvalidOperationException("A conexão com o banco de dados n�o foi configurada corretamente.");
+                throw new InvalidOperationException("A conexão com o banco de dados não foi configurada corretamente.");
             }
 
             builder.Services.AddDbContext<RestauranteContext>(
