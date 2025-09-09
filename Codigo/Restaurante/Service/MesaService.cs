@@ -20,6 +20,7 @@ namespace Service
         public uint Create(Mesa mesa)
         {
             mesa.IdRestaurante = 1;
+            mesa.Ativo = true; // Define o valor padrão como 'true' ao criar uma nova mesa
             _context.Add(mesa);
             _context.SaveChanges();
             return (uint)mesa.Id;
@@ -30,7 +31,7 @@ namespace Service
             var existingMesa = _context.Mesas.Find(id);
             if (existingMesa != null)
             {
-                _context.Mesas.Remove(existingMesa);
+                existingMesa.Ativo = false; // Marca como inativa em vez de remover
                 _context.SaveChanges();
             }
         }
@@ -49,13 +50,13 @@ namespace Service
 
         public Mesa Get(int id)
         {
-            return _context.Mesas.FirstOrDefault(m => m.Id == id)
+            return _context.Mesas.FirstOrDefault(m => m.Id == id && m.Ativo)
                    ?? throw new KeyNotFoundException($"Mesa não encontrada.");
         }
 
         public IEnumerable<Mesa> GetAll()
         {
-            return _context.Mesas.ToList();
+            return _context.Mesas.Where(m => m.Ativo).ToList();
         }
 
 

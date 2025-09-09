@@ -37,22 +37,21 @@ namespace RestauranteWeb.Controllers
         // GET: MesaController/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
         // POST: MesaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Models.MesaModel mesaModel)
         {
             if (ModelState.IsValid)
             {
-                var mesa = _mapper.Map<Core.Mesa>(collection);
+                var mesa = _mapper.Map<Core.Mesa>(mesaModel);
                 _mesaService.Create(mesa);
+                return RedirectToAction(nameof(Index));
             }
-
-            return RedirectToAction(nameof(Index));
+            return View(mesaModel);
         }
 
         // GET: MesaController/Edit/5
@@ -60,22 +59,22 @@ namespace RestauranteWeb.Controllers
         {
             var mesa = _mesaService.Get(id);
             var mesaModel = _mapper.Map<Models.MesaModel>(mesa);
-
-            return View();
+            return View(mesaModel);
         }
 
         // POST: MesaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Models.MesaModel mesaModel)
         {
             if(ModelState.IsValid)
             {
-                var mesa = _mapper.Map<Core.Mesa>(collection);
+                var mesa = _mapper.Map<Core.Mesa>(mesaModel);
                 mesa.Id = id;
                 _mesaService.Edit(mesa);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            return View(mesaModel);
         }
 
         // GET: MesaController/Delete/5
@@ -83,13 +82,13 @@ namespace RestauranteWeb.Controllers
         {
             var mesa = _mesaService.Get(id);
             var mesaModel = _mapper.Map<Models.MesaModel>(mesa);
-            return View();
+            return View(mesaModel);
         }
 
         // POST: MesaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Models.MesaModel mesaModel)
         {
             _mesaService.Delete(id);
             return RedirectToAction(nameof(Index));
