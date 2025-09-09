@@ -1,62 +1,37 @@
-/* Importa a fonte 'Poppins' do Google Fonts para um visual mais moderno */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-/* Configurações globais da página */
 html {
     font-size: 16px;
 }
 
 body {
-    background-color: #f0f2f5; /* Um cinza bem claro para o fundo da janela */
+    background-color: #f0f2f5;
     margin: 0;
-    font-family: 'Poppins', sans-serif; /* Aplica a nova fonte */
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
 }
 
-/* --- ESTRUTURA PRINCIPAL COM CSS GRID --- */
 .grid-container {
     display: grid;
     min-height: 100vh;
-    /* Define as colunas: Menu esquerdo, Conteúdo principal (flexível), Sidebar direita */
     grid-template-columns: 260px 1fr 240px;
-    /* Define as linhas: A área principal cresce e o rodapé tem altura automática */
     grid-template-rows: 1fr auto;
-    /* Mapeia as áreas. Note que o 'header' (menu esquerdo) ocupa as duas linhas, fazendo o footer se alinhar corretamente. */
     grid-template-areas:
         "header main-col sidebar"
         "header footer   footer";
 }
 
-/* --- MAPEAMENTO DAS ÁREAS --- */
 .header-area {
     grid-area: header;
-}
-
-.main-column {
-    grid-area: main-col;
-}
-
-.sidebar-area {
-    grid-area: sidebar;
-}
-
-.footer-area {
-    grid-area: footer;
-}
-
-/* --- ESTILIZAÇÃO DOS BLOCOS --- */
-
-/* Bloco do Menu Esquerdo (Header) */
-.header-area {
-    background-color: #f8f5f2; /* Cor de fundo bege claro */
+    background-color: #f8f5f2;
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha itens à esquerda */
+    align-items: flex-start;
     border-right: 1px solid #e0e0e0;
 }
 
@@ -66,17 +41,16 @@ body {
 }
 
 .logo-container img {
-    max-width: 50px; /* Ajuste o tamanho do seu logo */
+    max-width: 50px;
     margin-bottom: 0.5rem;
 }
 
 .logo-container .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #d9534f; /* Um tom de vermelho para o 'Web' */
+    color: #d9534f;
 }
 
-/* Estilo do Menu de Navegação Principal (Esquerda) */
 .main-nav {
     width: 100%;
     list-style: none;
@@ -99,7 +73,6 @@ body {
     color: #000;
 }
 
-/* Estilo para os menus dropdown na navegação */
 .main-nav .dropdown-menu {
     border: none;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -109,24 +82,24 @@ body {
     font-weight: 400;
 }
 
-/* Coluna Principal e Conteúdo */
 .main-column {
+    grid-area: main-col;
     padding: 1rem;
-    background-color: #e9ecef; /* Cor de fundo cinza para o conteúdo */
+    background-color: #e9ecef;
     min-height: 0;
 }
 
 .content-area {
-    background-color: #fff; /* Fundo branco para a área de @RenderBody */
+    background-color: #fff;
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     height: 100%;
 }
 
-/* Barra Lateral Direita (Sidebar) */
 .sidebar-area {
-    background-color: #7f8b68; /* Cor de fundo verde oliva */
+    grid-area: sidebar;
+    background-color: #7f8b68;
     padding: 2rem 1.5rem;
     color: #fff;
 }
@@ -155,17 +128,64 @@ body {
     width: 100%;
 }
 
-/* Rodapé */
 .footer-area {
-    background-color: #c9d2de; /* Fundo azul-acinzentado */
+    grid-area: footer;
+    background-color: #c9d2de;
     color: #343a40;
     padding: 1rem;
     text-align: center;
 }
 
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.form-card-custom {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.form-card-custom .card-header {
+    background-color: #f8f5f2;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.form-card-custom .card-header h4 {
+    margin: 0;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.form-card-custom .card-body {
+    padding: 2rem 1.5rem;
+}
+
+.form-card-custom .form-label {
+    color: #343a40;
+}
+
+.form-card-custom .form-control:focus {
+    border-color: #d9534f;
+    box-shadow: 0 0 0 0.25rem rgba(217, 83, 79, 0.25);
+}
+
+.form-card-custom .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+}
+
+.form-card-custom .btn-secondary {
+    font-weight: 500;
+}
+
 @media (max-width: 992px) {
     .grid-container {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-template-areas:
             "header"
@@ -173,7 +193,6 @@ body {
             "sidebar"
             "footer";
     }
-
     .header-area {
         border-right: none;
         border-bottom: 1px solid #e0e0e0;

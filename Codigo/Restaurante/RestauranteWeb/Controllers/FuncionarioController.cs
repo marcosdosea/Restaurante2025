@@ -13,7 +13,7 @@ namespace RestauranteWeb.Controllers
         {
             _context = context;
         }
-
+        
         public IActionResult Index()
         {
             var funcionarios = _context.Funcionarios.Include(f => f.IdTipoFuncionarioNavigation).ToList();
@@ -33,6 +33,7 @@ namespace RestauranteWeb.Controllers
         public IActionResult Create()
         {
             ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome");
+            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome");
             return View();
         }
 
@@ -48,6 +49,7 @@ namespace RestauranteWeb.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionario.IdTipoFuncionario);
+            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome", funcionario.IdRestaurante);
             return View(funcionario);
         }
 

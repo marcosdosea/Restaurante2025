@@ -16,4 +16,5 @@ public partial class Mesa
     public virtual Restaurante IdRestauranteNavigation { get; set; } = null!;
     public int Numero { get; set; }
     public int Capacidade { get; set; }
+    public bool Ativo { get; set; } = true;
 }

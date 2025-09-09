@@ -16,11 +16,50 @@
         <input asp-for="Cpf" class="form-control" maxlength="14" />
         <span asp-validation-for="Cpf" class="text-danger"></span>
     </div>
-    <!-- outros campos -->
+    <div class="form-group mb-3">
+        <label asp-for="IdRestaurante" class="form-label">Restaurante</label>
+        <select asp-for="IdRestaurante" class="form-select" asp-items="ViewBag.Restaurantes"></select>
+        <span asp-validation-for="IdRestaurante" class="text-danger"></span>
+    </div>
     <div class="form-group mb-3">
         <label asp-for="IdTipoFuncionario" class="form-label">Função</label>
         <select asp-for="IdTipoFuncionario" class="form-select" asp-items="ViewBag.TiposFuncionario"></select>
         <span asp-validation-for="IdTipoFuncionario" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Cep" class="form-label"></label>
+        <input asp-for="Cep" class="form-control" />
+        <span asp-validation-for="Cep" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Rua" class="form-label"></label>
+        <input asp-for="Rua" class="form-control" />
+        <span asp-validation-for="Rua" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Bairro" class="form-label"></label>
+        <input asp-for="Bairro" class="form-control" />
+        <span asp-validation-for="Bairro" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Cidade" class="form-label"></label>
+        <input asp-for="Cidade" class="form-control" />
+        <span asp-validation-for="Cidade" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+        <input asp-for="Estado" class="form-control" />
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Telefone1" class="form-label"></label>
+        <input asp-for="Telefone1" class="form-control" />
+        <span asp-validation-for="Telefone1" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Telefone2" class="form-label"></label>
+        <input asp-for="Telefone2" class="form-control" />
+        <span asp-validation-for="Telefone2" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a asp-action="Index" class="btn btn-secondary ms-2">Voltar à lista</a>
