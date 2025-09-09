@@ -96,7 +96,7 @@ ENGINE = InnoDB;
 -- Table `restaurante`.`mesa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `restaurante`.`mesa` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `identificacao` VARCHAR(45) NOT NULL,
   `idRestaurante` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
@@ -113,7 +113,7 @@ ENGINE = InnoDB;
 -- Table `restaurante`.`GrupoCardapio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `restaurante`.`GrupoCardapio` (
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;

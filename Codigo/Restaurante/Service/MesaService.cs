@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    internal class MesaService : IMesaService
+    public class MesaService : IMesaService
     {
         private readonly RestauranteContext _context;
 
