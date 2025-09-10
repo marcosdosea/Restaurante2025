@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Adicionar Funcionário";
 }
-<h2>@ViewData["Title"]</h2>
+<h2><i class="fa-solid fa-user-plus"></i> @ViewData["Title"]</h2>
 <form asp-action="Create" method="post" autocomplete="off">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -61,8 +61,8 @@
         <input asp-for="Telefone2" class="form-control" />
         <span asp-validation-for="Telefone2" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <a asp-action="Index" class="btn btn-secondary ms-2">Voltar à lista</a>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Salvar</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2"><i class="fa-solid fa-arrow-left"></i> Voltar à lista</a>
 </form>
 
 @section Scripts {

@@ -1,6 +1,6 @@
 ﻿@model RestauranteWeb.Models.MesaModel
 
-<h4>Mesa</h4>
+<h4><i class="fa-solid fa-table"></i> Mesa</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,7 +33,7 @@
     </div>
 </div>
 <div>
-    <a asp-action="Index">Voltar ao Início</a>
+    <a asp-action="Index" class="btn btn-secondary mt-2"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

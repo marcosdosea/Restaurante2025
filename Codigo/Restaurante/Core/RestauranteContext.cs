@@ -151,7 +151,11 @@ public partial class RestauranteContext : DbContext
 
             entity.ToTable("grupocardapio");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .HasColumnType("int unsigned")
+                .ValueGeneratedOnAdd(); // Garante que o Id seja gerado automaticamente
+
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .HasColumnName("nome");

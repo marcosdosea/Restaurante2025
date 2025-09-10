@@ -19,7 +19,9 @@ namespace Service
         /// <returns></returns>
         public uint Create(Grupocardapio grupocardapio)
         {
-            _context.Add(grupocardapio);
+            // Garante que o banco gere o Id
+            grupocardapio.Id = 0;
+            _context.Grupocardapios.Add(grupocardapio);
             _context.SaveChanges();
 
             return grupocardapio.Id;

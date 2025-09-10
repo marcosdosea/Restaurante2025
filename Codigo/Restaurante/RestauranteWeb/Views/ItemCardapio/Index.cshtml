@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<RestauranteWeb.Models.ItemCardapioModel>
 
+<h2><i class="fa-solid fa-burger"></i> Itens do Cardápio</h2>
 <p>
-    <a class="btn btn-primary" asp-action="Create">Criar novo</a>
+    <a class="btn btn-primary" asp-action="Create"><i class="fa-solid fa-plus"></i> Criar novo</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.Disponivel)
             </td>
             <td>
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pencil"></i> Editar</a> |
+                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-ellipsis"></i> Detalhes</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i> Deletar</a>
             </td>
         </tr>
 }

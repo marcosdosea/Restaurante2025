@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<RestauranteWeb.Models.MesaModel>
 
-    @{
+@{
     ViewData["Title"] = "Mesas";
 }
 
-<h2>Mesas</h2>
+<h2><i class="fa-solid fa-table"></i> Mesas</h2>
 <p>
-    <a asp-action="Create">Adicionar nova mesa</a>
+    <a asp-action="Create"><i class="fa-solid fa-plus"></i> Adicionar nova mesa</a>
 </p>
 
 <table class="table">
@@ -22,7 +22,6 @@
         </tr>
     </thead>
     <tbody>
-
         @foreach (var item in Model)
         {
             <tr>
@@ -33,12 +32,11 @@
                     @Html.DisplayFor(modelItem => item.Capacidade)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pencil"></i> Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-ellipsis"></i> Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i> Deletar</a>
                 </td>
             </tr>
-}
-
+        }
     </tbody>
 </table>

@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Editar Funcionário";
 }
-<h2>Editar Funcionário</h2>
+<h2><i class="fa-solid fa-user-edit"></i> Editar Funcionário</h2>
 <form asp-action="Edit">
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
@@ -17,13 +17,18 @@
     </div>
     <!-- outros campos -->
     <div class="form-group">
+        <label asp-for="IdRestaurante" class="control-label">Restaurante</label>
+        <select asp-for="IdRestaurante" class="form-control" asp-items="ViewBag.Restaurantes"></select>
+        <span asp-validation-for="IdRestaurante" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="IdTipoFuncionario" class="control-label">Função</label>
         <select asp-for="IdTipoFuncionario" class="form-control" asp-items="ViewBag.TiposFuncionario"></select>
         <span asp-validation-for="IdTipoFuncionario" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Salvar</button>
 </form>
-<a asp-action="Index">Voltar à lista</a>
+<a asp-action="Index" class="btn btn-secondary mt-2"><i class="fa-solid fa-arrow-left"></i> Voltar à lista</a>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

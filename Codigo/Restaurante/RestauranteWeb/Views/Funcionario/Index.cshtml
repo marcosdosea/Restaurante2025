@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "Funcionários";
 }
-<h2>Funcionários</h2>
+<h2><i class="fa-solid fa-users"></i> Funcionários</h2>
 <p>
-    <a asp-action="Create" class="btn btn-primary">Novo Funcionário</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Novo Funcionário</a>
 </p>
 <table class="table">
     <thead>
@@ -23,9 +23,9 @@
             <td>@item.Cpf</td>
             <td>@item.IdTipoFuncionarioNavigation?.Nome</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pencil"></i> Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-ellipsis"></i> Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i> Excluir</a>
             </td>
         </tr>
     }

@@ -7,58 +7,57 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RestauranteWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <div class="grid-container">
         <header class="header-area">
-            <div class="logo-container">
-
+            <div class="logo-container text-center w-100" style="padding: 20px 0;">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="logo-text">Restaurante<span style="color: #21391e;">Web</span></span>
+                    <span class="logo-text" style="font-size:1.2rem; font-weight:bold; color:#d9534f; white-space:nowrap; letter-spacing:1px;"> <i class="fa-solid fa-utensils"></i> RestauranteWeb </span>
                 </a>
             </div>
             <ul class="main-nav navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">INICIO</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i> INICIO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Mesa" asp-action="Index">MESA</a>
+                    <a class="nav-link" asp-area="" asp-controller="Mesa" asp-action="Index"><i class="fa-solid fa-table"></i> MESA</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        CARDÁPIO
+                        <i class="fa-solid fa-book-open"></i> CARDÁPIO
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="ItemCardapio" asp-action="Index">Itens do Cardápio</a></li>
-                        <li><a class="dropdown-item" asp-controller="GrupoCardapio" asp-action="Index">Grupos de Cardápio</a></li>
+                        <li><a class="dropdown-item" asp-controller="ItemCardapio" asp-action="Index"><i class="fa-solid fa-burger"></i> Itens do Cardápio</a></li>
+                        <li><a class="dropdown-item" asp-controller="GrupoCardapio" asp-action="Index"><i class="fa-solid fa-layer-group"></i> Grupos de Cardápio</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="FormaPagamento" asp-action="Index">FORMA DE PAGAMENTO</a>
+                    <a class="nav-link" asp-area="" asp-controller="FormaPagamento" asp-action="Index"><i class="fa-solid fa-credit-card"></i> FORMA DE PAGAMENTO</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        FUNCIONARIOS
+                        <i class="fa-solid fa-users"></i> FUNCIONARIOS
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="Funcionario" asp-action="Index">Funcionários</a></li>
-                        <li><a class="dropdown-item" asp-controller="TipoFuncionario" asp-action="Index">Tipos de Funcionário</a></li>
+                        <li><a class="dropdown-item" asp-controller="Funcionario" asp-action="Index"><i class="fa-solid fa-user-tie"></i> Funcionários</a></li>
+                        <li><a class="dropdown-item" asp-controller="TipoFuncionario" asp-action="Index"><i class="fa-solid fa-user-tag"></i> Tipos de Funcionário</a></li>
                     </ul>
                 </li>
-                 <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        CADASTRO RESTAURANTE
+                        <i class="fa-solid fa-store"></i> RESTAURANTE
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="Restaurante" asp-action="Index">Restaurantes</a></li>
-                        <li><a class="dropdown-item" asp-controller="TipoRestaurante" asp-action="Index">Tipos de Restaurante</a></li>
+                        <li><a class="dropdown-item" asp-controller="Restaurante" asp-action="Index"><i class="fa-solid fa-store"></i> Restaurantes</a></li>
+                        <li><a class="dropdown-item" asp-controller="TipoRestaurante" asp-action="Index"><i class="fa-solid fa-tags"></i> Tipos de Restaurante</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Pagamento" asp-action="Pagamentos" asp-route-atendimentoId="1">PAGAMENTO</a>
+                    <a class="nav-link" asp-area="" asp-controller="Pagamento" asp-action="Pagamentos" asp-route-atendimentoId="1"><i class="fa-solid fa-money-bill-wave"></i> PAGAMENTO</a>
                 </li>
             </ul>
-
             <partial name="_LoginPartial" />
         </header>
         <div class="main-column">
@@ -67,22 +66,22 @@
             </main>
         </div>
         <aside class="sidebar-area">
-            <h4>Aceso rápido</h4>
+            <h4><i class="fa-solid fa-bolt"></i> Aceso rápido</h4>
             <ul class="quick-access-nav navbar-nav mt-3">
                  <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Mesa" asp-action="Index">MESA</a>
+                    <a class="nav-link" asp-area="" asp-controller="Mesa" asp-action="Index"><i class="fa-solid fa-table"></i> MESA</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        CARDÁPIO
+                        <i class="fa-solid fa-book-open"></i> CARDÁPIO
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="ItemCardapio" asp-action="Index">Itens do Cardápio</a></li>
-                        <li><a class="dropdown-item" asp-controller="GrupoCardapio" asp-action="Index">Grupos de Cardápio</a></li>
+                        <li><a class="dropdown-item" asp-controller="ItemCardapio" asp-action="Index"><i class="fa-solid fa-burger"></i> Itens do Cardápio</a></li>
+                        <li><a class="dropdown-item" asp-controller="GrupoCardapio" asp-action="Index"><i class="fa-solid fa-layer-group"></i> Grupos de Cardápio</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="FormaPagamento" asp-action="Index">FORMA DE PAGAMENTO</a>
+                    <a class="nav-link" asp-area="" asp-controller="FormaPagamento" asp-action="Index"><i class="fa-solid fa-credit-card"></i> FORMA DE PAGAMENTO</a>
                 </li>
             </ul>
         </aside>

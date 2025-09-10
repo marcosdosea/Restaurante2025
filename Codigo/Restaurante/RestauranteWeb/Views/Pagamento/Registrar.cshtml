@@ -1,6 +1,6 @@
 @model RestauranteWeb.Models.PagamentoModel
 
-<h4>Registrar Pagamento</h4>
+<h4><i class="fa-solid fa-money-bill-wave"></i> Registrar Pagamento</h4>
 <hr />
 <form asp-action="Registrar">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -20,7 +20,7 @@
     </div>
 </form>
 <div>
-    <a asp-action="Pagamentos" asp-route-atendimentoId="@Model.IdAtendimento">Ver Pagamentos</a>
+    <a asp-action="Pagamentos" asp-route-atendimentoId="@Model.IdAtendimento" class="btn btn-secondary mt-2"><i class="fa-solid fa-list"></i> Ver Pagamentos</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
