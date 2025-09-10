@@ -72,6 +72,9 @@
                  <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Mesa" asp-action="Index">MESA</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Atendimento" asp-action="Iniciar">INICIAR ATENDIMENTO</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         CARDÁPIO
@@ -82,7 +85,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="FormaPagamento" asp-action="Index">FORMA DE PAGAMENTO</a>
+                    <a class="nav-link" asp-area="" asp-controller="Pagamento" asp-action="Pagamentos" asp-route-atendimentoId="1">PAGAMENTO</a>
                 </li>
             </ul>
         </aside>
