@@ -1,4 +1,4 @@
-@model Core.Funcionario
+@model RestauranteWeb.Models.FuncionarioModel
 @{
     ViewData["Title"] = "Editar Funcionário";
 }
@@ -24,3 +24,7 @@
     <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
 <a asp-action="Index">Voltar à lista</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
