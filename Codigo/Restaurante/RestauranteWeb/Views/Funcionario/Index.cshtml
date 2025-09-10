@@ -4,9 +4,48 @@
     var totalPages = ViewBag.TotalPages as int? ?? 1;
     var currentPage = ViewBag.CurrentPage as int? ?? 1;
     var currentPageSize = ViewBag.CurrentPageSize as int? ?? 10;
+    var currentCpf = ViewBag.CurrentCpf as string ?? "";
+    var currentNome = ViewBag.CurrentNome as string ?? "";
+    var currentCargo = ViewBag.CurrentCargo as string ?? "";
+    var cargos = ViewBag.Cargos as SelectList;
 }
 <h2><i class="fa-solid fa-users"></i> Funcionários</h2>
-
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-2">
+        <input type="text" name="cpf" value="@currentCpf" class="form-control" placeholder="Buscar por CPF" />
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="nome" value="@currentNome" class="form-control" placeholder="Buscar por Nome" />
+    </div>
+    <div class="col-md-2">
+        <select name="cargo" class="form-select">
+            <option value="">Todos os cargos</option>
+            @if (cargos != null)
+            {
+                foreach (var cargo in cargos)
+                {
+                    var selected = cargo.Value == currentCargo ? "selected" : "";
+                    <option value="@cargo.Value" selected="@selected">@cargo.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="pageSize" class="form-select" onchange="this.form.submit()">
+            @{
+                var sizes = new int[] { 5, 10, 20 };
+                foreach (var size in sizes)
+                {
+                    var selected = size == currentPageSize ? "selected" : "";
+                    <option value="@size" selected="@selected">@size</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+    </div>
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Novo Funcionário</a>
 </p>
@@ -40,7 +79,7 @@
         @for (int i = 1; i <= totalPages; i++)
         {
             <li class="page-item @(i == currentPage ? "active" : "")">
-                <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-pageSize="@currentPageSize">@i</a>
+                <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-pageSize="@currentPageSize" asp-route-cpf="@currentCpf" asp-route-nome="@currentNome" asp-route-cargo="@currentCargo">@i</a>
             </li>
         }
     </ul>

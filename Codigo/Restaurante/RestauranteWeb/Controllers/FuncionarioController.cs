@@ -20,20 +20,24 @@ namespace RestauranteWeb.Controllers
             _mapper = mapper;
         }
         
-        public IActionResult Index(int page = 1, int pageSize = 10, string cpf = "", string nome = "")
+        public IActionResult Index(int page = 1, int pageSize = 10, string cpf = "", string nome = "", string cargo = "")
         {
             var query = _context.Funcionarios.Include(f => f.IdTipoFuncionarioNavigation).AsQueryable();
             if (!string.IsNullOrEmpty(cpf))
                 query = query.Where(f => f.Cpf.Contains(cpf));
             if (!string.IsNullOrEmpty(nome))
                 query = query.Where(f => f.Nome.Contains(nome));
+            if (!string.IsNullOrEmpty(cargo))
+                query = query.Where(f => f.IdTipoFuncionarioNavigation.Nome == cargo);
             var totalItems = query.Count();
             var funcionarios = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
             ViewBag.CurrentPage = page;
             ViewBag.CurrentCpf = cpf;
             ViewBag.CurrentNome = nome;
+            ViewBag.CurrentCargo = cargo;
             ViewBag.CurrentPageSize = pageSize;
+            ViewBag.Cargos = new SelectList(_context.Tipofuncionarios.Select(t => t.Nome).Distinct().ToList());
             return View(funcionarios);
         }
 
