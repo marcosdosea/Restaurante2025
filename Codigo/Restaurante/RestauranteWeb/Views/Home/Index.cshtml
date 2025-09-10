@@ -1,8 +1,61 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var restaurantes = ViewBag.Restaurantes as IEnumerable<Core.Restaurante>;
+    var cardapios = ViewBag.Cardapios as IEnumerable<Core.Itemcardapio>;
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container py-4">
+    <h1 class="mb-4 text-center"><i class="fa-solid fa-utensils"></i> Bem-vindo ao RestauranteWeb</h1>
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-3"><i class="fa-solid fa-store"></i> Restaurantes</h2>
+            <div class="row g-4">
+                @if (restaurantes != null && restaurantes.Any())
+                {
+                    foreach (var r in restaurantes)
+                    {
+                        <div class="col-md-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary"><i class="fa-solid fa-store"></i> @r.Nome</h5>
+                                    <p class="card-text mb-1"><i class="fa-solid fa-location-dot"></i> @r.Cidade - @r.Estado</p>
+                                    <p class="card-text"><i class="fa-solid fa-tags"></i> @r.IdTipoRestauranteNavigation?.Nome</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center text-muted">Nenhum restaurante cadastrado.</div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-3"><i class="fa-solid fa-book-open"></i> Cardápios</h2>
+            <div class="row g-4">
+                @if (cardapios != null && cardapios.Any())
+                {
+                    foreach (var c in cardapios)
+                    {
+                        <div class="col-md-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title text-success"><i class="fa-solid fa-burger"></i> @c.Nome</h5>
+                                    <p class="card-text mb-1"><i class="fa-solid fa-layer-group"></i> Grupo: @c.IdGrupoCardapioNavigation?.Nome</p>
+                                    <p class="card-text mb-1"><i class="fa-solid fa-store"></i> Restaurante: @c.IdRestauranteNavigation?.Nome</p>
+                                    <p class="card-text"><i class="fa-solid fa-money-bill-wave"></i> Preço: <span class="fw-bold">@string.Format("{0:C}", c.Preco)</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center text-muted">Nenhum item de cardápio cadastrado.</div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
