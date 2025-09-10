@@ -7,7 +7,6 @@ namespace RestauranteWeb.Models
     {
         [Display(Name = "Código")]
         [Key]
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public int Id { get; set; }
 
         [Display(Name = "Número")]
@@ -20,13 +19,14 @@ namespace RestauranteWeb.Models
 
         [Display(Name = "Restaurante")]
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        public int IdRestaurante { get; set; }
+        public uint IdRestaurante { get; set; }
 
-        public virtual bool Ativo { get; set; }
+        [Display(Name = "Identificação")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [StringLength(45, ErrorMessage = "O campo {0} deve ter até {1} caracteres.")]
+        public string Identificacao { get; set; } = string.Empty;
 
-        public virtual Restaurante IdRestauranteNavigation { get; set; } = null!;
-
-        public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
-
+        [Display(Name = "Ativo")]
+        public bool Ativo { get; set; } = true;
     }
 }

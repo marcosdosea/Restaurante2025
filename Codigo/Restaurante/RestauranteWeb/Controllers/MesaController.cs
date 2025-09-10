@@ -12,11 +12,19 @@ namespace RestauranteWeb.Controllers
 
         private readonly IMesaService _mesaService;
         private readonly IMapper _mapper;
+        private readonly IRestauranteService _restauranteService;
 
-        public MesaController(IMesaService mesaService, IMapper mapper)
+        public MesaController(IMesaService mesaService, IMapper mapper, IRestauranteService restauranteService)
         {
             _mesaService = mesaService;
             _mapper = mapper;
+            _restauranteService = restauranteService;
+        }
+
+        private void CarregarRestaurantes()
+        {
+            var restaurantes = _restauranteService.GetAll();
+            ViewBag.IdRestaurante = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(restaurantes, "Id", "Nome");
         }
 
         // GET: MesaController
@@ -39,6 +47,7 @@ namespace RestauranteWeb.Controllers
         // GET: MesaController/Create
         public ActionResult Create()
         {
+            CarregarRestaurantes();
             return View();
         }
 
@@ -53,6 +62,8 @@ namespace RestauranteWeb.Controllers
                 _mesaService.Create(mesa);
                 return RedirectToAction(nameof(Index));
             }
+            CarregarRestaurantes();
+            // Exibe os erros de validação na view
             return View(mesaModel);
         }
 

@@ -19,7 +19,6 @@ namespace Service
 
         public uint Create(Mesa mesa)
         {
-            mesa.IdRestaurante = 1;
             mesa.Ativo = true; // Define o valor padrão como 'true' ao criar uma nova mesa
             _context.Add(mesa);
             _context.SaveChanges();
