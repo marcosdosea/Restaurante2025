@@ -21,10 +21,14 @@ namespace RestauranteWeb.Controllers
         }
 
         // GET: GrupoCardapioController
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var gruposCardapio = _grupoCardapioService.GetAll();
+            var query = _grupoCardapioService.GetAll().AsQueryable();
+            var totalItems = query.Count();
+            var gruposCardapio = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             var grupoCardapioModel = _mapper.Map<List<GrupoCardapioModel>>(gruposCardapio);
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
             return View(grupoCardapioModel);
         }
 

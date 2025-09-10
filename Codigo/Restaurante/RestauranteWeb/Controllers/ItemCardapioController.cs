@@ -26,11 +26,14 @@ namespace RestauranteWeb.Controllers
         }
 
         // GET: ItemCardapioController
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var itensCardapio = _itemCardapioService.GetAll();
+            var query = _itemCardapioService.GetAll().AsQueryable();
+            var totalItems = query.Count();
+            var itensCardapio = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             var itemCardapioModel = _mapper.Map<List<ItemCardapioModel>>(itensCardapio);
-
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
             return View(itemCardapioModel);
         }
 

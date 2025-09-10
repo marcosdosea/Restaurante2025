@@ -1,22 +1,21 @@
 ﻿@model IEnumerable<RestauranteWeb.Models.MesaModel>
-
 @{
     ViewData["Title"] = "Mesas";
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var currentPage = ViewBag.CurrentPage as int? ?? 1;
 }
-
 <h2><i class="fa-solid fa-table"></i> Mesas</h2>
 <p>
     <a asp-action="Create"><i class="fa-solid fa-plus"></i> Adicionar nova mesa</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Numero)
+                @Html.DisplayNameFor(model => model.First().Numero)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacidade)
+                @Html.DisplayNameFor(model => model.First().Capacidade)
             </th>
             <th></th>
         </tr>
@@ -40,3 +39,13 @@
         }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

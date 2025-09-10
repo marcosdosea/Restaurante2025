@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Restaurantes";
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var currentPage = ViewBag.CurrentPage as int? ?? 1;
 }
 
 <h2><i class="fa-solid fa-store"></i> Restaurantes</h2>
@@ -13,19 +15,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.First().Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cnpj)
+                @Html.DisplayNameFor(model => model.First().Cnpj)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoRestauranteNome)
+                @Html.DisplayNameFor(model => model.First().TipoRestauranteNome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cidade)
+                @Html.DisplayNameFor(model => model.First().Cidade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                @Html.DisplayNameFor(model => model.First().Estado)
             </th>
             <th></th>
         </tr>
@@ -58,3 +60,14 @@
         }
     </tbody>
 </table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

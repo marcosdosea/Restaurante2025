@@ -26,10 +26,14 @@ namespace RestauranteWeb.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int pageSize = 10)
         {
-            var restaurantes = _restauranteService.GetAll();
+            var query = _restauranteService.GetAll().AsQueryable();
+            var totalItems = query.Count();
+            var restaurantes = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             var model = _mapper.Map<List<RestauranteModel>>(restaurantes);
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
             return View(model);
         }
 

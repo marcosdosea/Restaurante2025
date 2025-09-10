@@ -28,11 +28,14 @@ namespace RestauranteWeb.Controllers
         }
 
         // GET: MesaController
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var mesas = _mesaService.GetAll();
+            var query = _mesaService.GetAll().AsQueryable();
+            var totalItems = query.Count();
+            var mesas = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             var mesaModel = _mapper.Map<List<Models.MesaModel>>(mesas);
-
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
             return View(mesaModel);
         }
 

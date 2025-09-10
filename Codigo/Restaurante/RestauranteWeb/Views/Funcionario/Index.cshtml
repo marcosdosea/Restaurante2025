@@ -1,8 +1,12 @@
 @model IEnumerable<Core.Funcionario>
 @{
     ViewData["Title"] = "Funcionários";
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var currentPage = ViewBag.CurrentPage as int? ?? 1;
+    var currentPageSize = ViewBag.CurrentPageSize as int? ?? 10;
 }
 <h2><i class="fa-solid fa-users"></i> Funcionários</h2>
+
 <p>
     <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Novo Funcionário</a>
 </p>
@@ -31,3 +35,13 @@
     }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-pageSize="@currentPageSize">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

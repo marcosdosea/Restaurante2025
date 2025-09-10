@@ -20,9 +20,20 @@ namespace RestauranteWeb.Controllers
             _mapper = mapper;
         }
         
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int pageSize = 10, string cpf = "", string nome = "")
         {
-            var funcionarios = _context.Funcionarios.Include(f => f.IdTipoFuncionarioNavigation).ToList();
+            var query = _context.Funcionarios.Include(f => f.IdTipoFuncionarioNavigation).AsQueryable();
+            if (!string.IsNullOrEmpty(cpf))
+                query = query.Where(f => f.Cpf.Contains(cpf));
+            if (!string.IsNullOrEmpty(nome))
+                query = query.Where(f => f.Nome.Contains(nome));
+            var totalItems = query.Count();
+            var funcionarios = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
+            ViewBag.CurrentCpf = cpf;
+            ViewBag.CurrentNome = nome;
+            ViewBag.CurrentPageSize = pageSize;
             return View(funcionarios);
         }
 

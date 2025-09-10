@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<RestauranteWeb.Models.ItemCardapioModel>
-
+@{
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var currentPage = ViewBag.CurrentPage as int? ?? 1;
+}
 <h2><i class="fa-solid fa-burger"></i> Itens do Cardápio</h2>
 <p>
     <a class="btn btn-primary" asp-action="Create"><i class="fa-solid fa-plus"></i> Criar novo</a>
@@ -8,19 +11,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.First().Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Preco)
+                @Html.DisplayNameFor(model => model.First().Preco)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Detalhes)
+                @Html.DisplayNameFor(model => model.First().Detalhes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ativo)
+                @Html.DisplayNameFor(model => model.First().Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Disponivel)
+                @Html.DisplayNameFor(model => model.First().Disponivel)
             </th>
             <th></th>
         </tr>
@@ -52,3 +55,13 @@
 }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
