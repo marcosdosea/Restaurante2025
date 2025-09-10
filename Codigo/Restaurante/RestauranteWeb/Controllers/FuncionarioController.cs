@@ -1,8 +1,10 @@
+using AutoMapper;
 using Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RestauranteWeb.Models;
 
 namespace RestauranteWeb.Controllers
 {
@@ -10,10 +12,12 @@ namespace RestauranteWeb.Controllers
     public class FuncionarioController : Controller
     {
         private readonly RestauranteContext _context;
+        private readonly IMapper _mapper;
 
-        public FuncionarioController(RestauranteContext context)
+        public FuncionarioController(RestauranteContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         
         public IActionResult Index()
@@ -41,43 +45,48 @@ namespace RestauranteWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Funcionario funcionario)
+        public IActionResult Create(FuncionarioModel funcionarioModel)
         {
-            System.Diagnostics.Debug.WriteLine("POST Create chamado");
             if (ModelState.IsValid)
             {
+                var funcionario = _mapper.Map<Funcionario>(funcionarioModel);
+                funcionario.Id = 0;
                 _context.Funcionarios.Add(funcionario);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionario.IdTipoFuncionario);
-            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome", funcionario.IdRestaurante);
-            return View(funcionario);
+            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionarioModel.IdTipoFuncionario);
+            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome", funcionarioModel.IdRestaurante);
+            return View(funcionarioModel);
         }
 
-    public IActionResult Edit(uint id)
+        public IActionResult Edit(uint id)
         {
             var funcionario = _context.Funcionarios.Find(id);
             if (funcionario == null)
             {
                 return NotFound();
             }
-            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionario.IdTipoFuncionario);
-            return View(funcionario);
+            var funcionarioModel = _mapper.Map<FuncionarioModel>(funcionario);
+            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionarioModel.IdTipoFuncionario);
+            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome", funcionarioModel.IdRestaurante);
+            return View(funcionarioModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Funcionario funcionario)
+        public IActionResult Edit(FuncionarioModel funcionarioModel)
         {
             if (ModelState.IsValid)
             {
+                var funcionario = _mapper.Map<Funcionario>(funcionarioModel);
                 _context.Funcionarios.Update(funcionario);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionario.IdTipoFuncionario);
-            return View(funcionario);
+            ViewBag.TiposFuncionario = new SelectList(_context.Tipofuncionarios, "Id", "Nome", funcionarioModel.IdTipoFuncionario);
+            ViewBag.Restaurantes = new SelectList(_context.Restaurantes, "Id", "Nome", funcionarioModel.IdRestaurante);
+            return View(funcionarioModel);
         }
 
         public IActionResult Delete(uint id)

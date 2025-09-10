@@ -1,4 +1,4 @@
-@model Core.Funcionario
+@model RestauranteWeb.Models.FuncionarioModel
 @{
     ViewData["Title"] = "Adicionar Funcionário";
 }
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group mb-3">
         <label asp-for="Cpf" class="form-label"></label>
-        <input asp-for="Cpf" class="form-control" maxlength="14" />
+        <input asp-for="Cpf" class="form-control" maxlength="11" />
         <span asp-validation-for="Cpf" class="text-danger"></span>
     </div>
     <div class="form-group mb-3">
