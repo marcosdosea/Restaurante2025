@@ -1,0 +1,27 @@
+@model RestauranteWeb.Models.PagamentoModel
+
+<h4>Registrar Pagamento</h4>
+<hr />
+<form asp-action="Registrar">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdAtendimento" />
+    <div class="form-group">
+        <label asp-for="Valor" class="control-label"></label>
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdFormaPagamento" class="control-label"></label>
+        <select asp-for="IdFormaPagamento" class="form-control" asp-items="ViewBag.FormasPagamento"></select>
+        <span asp-validation-for="IdFormaPagamento" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Registrar" class="btn btn-primary" />
+    </div>
+</form>
+<div>
+    <a asp-action="Pagamentos" asp-route-atendimentoId="@Model.IdAtendimento">Ver Pagamentos</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

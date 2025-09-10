@@ -88,6 +88,8 @@ namespace RestauranteWeb
 
             builder.Services.AddScoped<IMesaService, MesaService>();
 
+            builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();

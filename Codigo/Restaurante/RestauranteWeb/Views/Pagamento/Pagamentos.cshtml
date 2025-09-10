@@ -1,0 +1,24 @@
+@model List<RestauranteWeb.Models.PagamentoModel>
+
+<h4>Pagamentos do Atendimento</h4>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data/Hora</th>
+            <th>Valor</th>
+            <th>Forma de Pagamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DataHora</td>
+                <td>@item.Valor.ToString("C")</td>
+                <td>@item.IdFormaPagamento</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p><strong>Total Pago:</strong> @ViewBag.TotalPago.ToString("C")</p>
