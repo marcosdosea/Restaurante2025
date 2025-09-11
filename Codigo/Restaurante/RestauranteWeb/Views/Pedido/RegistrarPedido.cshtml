@@ -1,15 +1,165 @@
+@model RestauranteWeb.Models.PedidoModel
 @{
     ViewData["Title"] = "Registrar Pedido";
     var atendimentoId = ViewBag.AtendimentoId;
 }
+
 <div class="form-container">
     <div class="form-card-custom">
         <div class="card-header">
-            <h4>Registrar Pedido</h4>
+            <h4>Registrar Pedido - Atendimento #@atendimentoId</h4>
         </div>
-        <div class="card-body">
-            <p>Atendimento iniciado! ID do atendimento: <strong>@atendimentoId</strong></p>
-            <!-- Aqui você pode adicionar o formulário para registrar pedidos -->
-        </div>
+
+        <form asp-action="RegistrarPedido" method="post">
+            <input type="hidden" asp-for="IdAtendimento" value="@atendimentoId" />
+
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Seleção do Garçom -->
+                <div class="mb-3">
+                    <label asp-for="IdGarcom" class="form-label"></label>
+                    <select asp-for="IdGarcom" class="form-select" asp-items="ViewBag.Garcons">
+                        <option value="">Selecione o Garçom</option>
+                    </select>
+                    <span asp-validation-for="IdGarcom" class="text-danger"></span>
+                </div>
+
+                <!-- Itens do Pedido -->
+                <div class="mb-4">
+                    <h5>Itens do Pedido</h5>
+
+                    <div id="itens-container">
+                        @for (int i = 0; i < Model.Itens.Count; i++)
+                        {
+                            <div class="item-pedido card mb-2">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Item do Cardápio</label>
+                                            <select asp-for="Itens[i].IdItemCardapio" class="form-select item-select"
+                                                    asp-items="ViewBag.ItensCardapio" onchange="atualizarPreco(this, @i)">
+                                                <option value="">Selecione o Item</option>
+                                            </select>
+                                            <span asp-validation-for="Itens[i].IdItemCardapio" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Quantidade</label>
+                                            <input asp-for="Itens[i].Quantidade" class="form-control quantidade"
+                                                   type="number" step="0.01" min="0.01" onchange="calcularTotal(@i)" />
+                                            <span asp-validation-for="Itens[i].Quantidade" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label">Preço Unit.</label>
+                                            <input asp-for="Itens[i].PrecoUnitario" class="form-control preco-unitario"
+                                                   type="number" step="0.01" min="0" readonly />
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="form-label">Total</label>
+                                            <input type="text" class="form-control total-item" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="adicionarItem()">
+                        + Adicionar Item
+                    </button>
+                </div>
+
+                <!-- Total do Pedido -->
+                <div class="row mb-3">
+                    <div class="col-md-9 text-end">
+                        <strong>Total do Pedido:</strong>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control fw-bold" id="total-pedido" value="R$ 0,00" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Registrar Pedido</button>
+                <a asp-controller="Atendimento" asp-action="Iniciar" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Dados dos itens do cardápio (preços)
+        var itensCardapio = @Html.Raw(Json.Serialize(ViewBag.ItensCardapioDados));
+
+        function adicionarItem() {
+            var index = $('#itens-container .item-pedido').length;
+            var novoItem = `
+                <div class="item-pedido card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Item do Cardápio</label>
+                                <select name="Itens[${index}].IdItemCardapio" class="form-select item-select"
+                                        onchange="atualizarPreco(this, ${index})">
+                                    <option value="">Selecione o Item</option>
+                                    @foreach (var item in ViewBag.ItensCardapio)
+                                    {
+                                                <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Quantidade</label>
+                                <input name="Itens[${index}].Quantidade" class="form-control quantidade"
+                                       type="number" step="0.01" min="0.01" onchange="calcularTotal(${index})" />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Preço Unit.</label>
+                                <input name="Itens[${index}].PrecoUnitario" class="form-control preco-unitario"
+                                       type="number" step="0.01" min="0" readonly />
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Total</label>
+                                <input type="text" class="form-control total-item" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            $('#itens-container').append(novoItem);
+        }
+
+        function atualizarPreco(select, index) {
+            var itemId = $(select).val();
+            var preco = itensCardapio.find(x => x.id == itemId)?.preco || 0;
+            $(select).closest('.item-pedido').find('.preco-unitario').val(preco);
+            calcularTotal(index);
+        }
+
+        function calcularTotal(index) {
+            var quantidade = parseFloat($('.item-pedido').eq(index).find('.quantidade').val()) || 0;
+            var precoUnitario = parseFloat($('.item-pedido').eq(index).find('.preco-unitario').val()) || 0;
+            var total = quantidade * precoUnitario;
+
+            $('.item-pedido').eq(index).find('.total-item').val('R$ ' + total.toFixed(2));
+            calcularTotalPedido();
+        }
+
+        function calcularTotalPedido() {
+            var totalPedido = 0;
+            $('.item-pedido').each(function() {
+                var totalText = $(this).find('.total-item').val();
+                if (totalText) {
+                    var total = parseFloat(totalText.replace('R$ ', '').replace(',', '.')) || 0;
+                    totalPedido += total;
+                }
+            });
+            $('#total-pedido').val('R$ ' + totalPedido.toFixed(2));
+        }
+    </script>
+}
