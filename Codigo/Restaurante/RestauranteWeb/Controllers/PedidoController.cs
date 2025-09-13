@@ -1,7 +1,10 @@
 using Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestauranteWeb.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RestauranteWeb.Controllers
 {
@@ -17,9 +20,34 @@ namespace RestauranteWeb.Controllers
 
         public IActionResult RegistrarPedido(int atendimentoId)
         {
-            // Aqui você pode buscar o atendimento e exibir os pedidos vinculados
+            var atendimento = _context.Atendimentos
+                .Include(a => a.IdMesaNavigation)
+                .FirstOrDefault(a => a.Id == atendimentoId);
+
+            if (atendimento == null)
+            {
+                return NotFound();
+            }
+
+            var itensCardapio = _context.Itemcardapios
+                .Where(i => i.IdRestaurante == atendimento.IdMesaNavigation.IdRestaurante && i.Ativo == 1)
+                .ToList();
+
+            var garcons = _context.Funcionarios
+                .Where(f => f.IdTipoFuncionario == 2)
+                .ToList();
+
+            ViewBag.ItensCardapio = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(itensCardapio, "Id", "Nome");
+            ViewBag.Garcons = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(garcons, "Id", "Nome");
             ViewBag.AtendimentoId = atendimentoId;
-            return View();
+
+            var model = new PedidoModel
+            {
+                IdAtendimento = (uint)atendimentoId,
+                Itens = new List<PedidoItemModel>()
+            };
+
+            return View(model);
         }
     }
 }

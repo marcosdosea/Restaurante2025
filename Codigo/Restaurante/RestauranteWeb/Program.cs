@@ -86,6 +86,8 @@ namespace RestauranteWeb
 
             builder.Services.AddScoped<IRestauranteService, RestauranteService>();
 
+            builder.Services.AddScoped<RestauranteContext>();
+
             builder.Services.AddScoped<IMesaService, MesaService>();
 
             builder.Services.AddScoped<IPagamentoService, PagamentoService>();

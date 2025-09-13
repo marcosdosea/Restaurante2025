@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "Registrar Pedido";
     var atendimentoId = ViewBag.AtendimentoId;
+
+    // CORREÇÃO: CRIAR UMA VARIÁVEL LOCAL EM VEZ DE MODIFICAR Model
+    var pedidoModel = Model ?? new RestauranteWeb.Models.PedidoModel
+    {
+        Itens = new List<RestauranteWeb.Models.PedidoItemModel>()
+    };
 }
 
 <div class="form-container">
@@ -30,7 +36,7 @@
                     <h5>Itens do Pedido</h5>
 
                     <div id="itens-container">
-                        @for (int i = 0; i < Model.Itens.Count; i++)
+                        @for (int i = 0; i < pedidoModel.Itens.Count; i++)
                         {
                             <div class="item-pedido card mb-2">
                                 <div class="card-body">
@@ -95,7 +101,7 @@
 
     <script>
         // Dados dos itens do cardápio (preços)
-        var itensCardapio = @Html.Raw(Json.Serialize(ViewBag.ItensCardapioDados));
+        var itensCardapio = @Html.Raw(Json.Serialize(ViewBag.ItensCardapioDados) );
 
         function adicionarItem() {
             var index = $('#itens-container .item-pedido').length;
@@ -110,7 +116,7 @@
                                     <option value="">Selecione o Item</option>
                                     @foreach (var item in ViewBag.ItensCardapio)
                                     {
-                                                <option value="@item.Value">@item.Text</option>
+                                                    <option value="@item.Value">@item.Text</option>
                                     }
                                 </select>
                             </div>
